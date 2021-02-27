@@ -32,8 +32,8 @@ pipeline {
   stage('Publish image to Docker Hub') {
           
             steps {
-        	withCredentials([string(credentialsId: 'Docker-hub', variable: 'DockerHub')]) {
-                sh "docker login -u vijay.itblabs@gmail.com -p ${DockerHub}"
+        	withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerpwd')]) {
+ 	                sh "docker login -u chinthirla -p ${DockerHub}"
                 }
                 sh  'docker push chinthirla/samplewebapp:latest'
                 //  sh  'docker push nikhilnidhi/samplewebapp:$BUILD_NUMBER' 

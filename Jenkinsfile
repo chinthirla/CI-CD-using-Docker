@@ -2,7 +2,10 @@ pipeline {
     agent any
 	tools {
 	    maven 'Maven3'
-		}	 
+		}
+	options {
+  		buildDiscarder logRotator(daysToKeepStr: '1', numToKeepStr: '3')
+	    }
  stages {
       stage('checkout') {
            steps {
@@ -33,7 +36,7 @@ pipeline {
           
             steps {
         	withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerpwd')]) {
- 	               sh "docker login -u chinthirla -p ${dockerhubpwd}"
+ 	               sh "docker login -u chinthirla -p ${dockerpwd}"
                 }
                 sh  'docker push chinthirla/samplewebapp:latest'
                 //  sh  'docker push nikhilnidhi/samplewebapp:$BUILD_NUMBER' 

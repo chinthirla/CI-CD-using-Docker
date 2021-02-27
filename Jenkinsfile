@@ -1,10 +1,8 @@
 pipeline {
     agent any
-	
-	  tools
-    {
-       maven "Maven"
-    }
+	tools {
+	    maven 'Maven3'
+		}	 
  stages {
       stage('checkout') {
            steps {
